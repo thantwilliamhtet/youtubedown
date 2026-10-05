@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111311">
+  <title>Beta Test</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <span class="beta-label">BETA TEST</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">Bring a video<br class="mobile-break"> <span>closer.</span></h1>
+        <p class="intro-copy">Paste a YouTube link to inspect its media details and available formats.</p>
+      </section>
+
+      <section class="workspace" aria-label="Video download workspace">
+        <div class="workspace-main">
+          <form id="analyze-form" class="url-form" novalidate>
+            <label for="video-url">VIDEO URL</label>
+            <div class="input-row">
+              <div class="input-wrap">
+                <svg class="link-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8.1 11.9a3 3 0 0 0 4.25 0l2.12-2.12a3 3 0 0 0-4.24-4.24l-1.22 1.2m1 5.32a3 3 0 0 1-4.24 0 3 3 0 0 1 0-4.24l2.12-2.12a3 3 0 0 1 4.24 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <input id="video-url" name="video-url" type="url" placeholder="Paste a YouTube link" autocomplete="url" aria-describedby="url-note form-feedback">
+              </div>
+              <button class="button button-primary" type="submit">
+                <span>Analyze</span>
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+            <p id="url-note" class="field-note">For content you own or are authorized to save.</p>
+            <p id="form-feedback" class="form-feedback" role="status" aria-live="polite" hidden></p>
+          </form>
+
+          <section id="media-panel" class="media-panel" aria-live="polite" hidden>
+            <div class="preview-head">
+              <span class="section-label">MEDIA DETAILS</span>
+              <span class="preview-tag"><span class="status-dot"></span> LIVE METADATA</span>
+            </div>
+            <div class="media-summary">
+              <div class="thumbnail">
+                <img id="media-thumbnail" alt="Video thumbnail" referrerpolicy="no-referrer" hidden>
+                <span id="thumbnail-fallback" class="thumbnail-fallback">THUMBNAIL UNAVAILABLE</span>
+              </div>
+              <div class="media-copy">
+                <p class="media-source">YOUTUBE <span>·</span> VIDEO</p>
+                <h2 id="media-title"></h2>
+                <p class="media-meta"><span id="media-uploader"></span><span> · </span><span id="media-duration"></span><span> · </span><span id="media-id"></span></p>
+              </div>
+            </div>
+            <div class="metadata-grid">
+              <div class="metadata-item"><span>VIDEO RESOLUTIONS</span><strong id="video-resolutions"></strong></div>
+              <div class="metadata-item"><span>AUDIO FORMATS</span><strong id="audio-formats"></strong></div>
+              <div class="metadata-item"><span>CONTAINERS</span><strong id="media-containers"></strong></div>
+              <div class="metadata-item"><span>AVAILABLE FORMATS</span><strong id="format-count"></strong></div>
+            </div>
+            <div id="download-options" class="selection-grid" hidden>
+              <label class="choice-group" for="quality-select">
+                <span class="select-label">QUALITY</span>
+                <span class="select-wrap">
+                  <select id="quality-select" name="quality"></select>
+                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </label>
+              <label class="choice-group" for="format-select">
+                <span class="select-label">FORMAT</span>
+                <span class="select-wrap">
+                  <select id="format-select" name="format"></select>
+                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </label>
+            </div>
+            <p id="download-format-note" class="format-note" role="status" hidden></p>
+            <details class="format-details">
+              <summary>Individual format details <span id="format-detail-count"></span></summary>
+              <ul id="format-list"></ul>
+            </details>
+            <div class="save-controls">
+              <div class="save-location">
+                <span>SAVE TO</span>
+                <strong id="selected-directory">No folder selected</strong>
+              </div>
+              <button id="choose-folder-button" class="button button-secondary" type="button">Choose Folder</button>
+            </div>
+            <div class="download-action">
+              <button id="download-button" class="button button-primary" type="button" disabled>
+                <span>Download</span>
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3.5v9m0 0 3.5-3.5M10 12.5 6.5 9M4 14v2.25c0 .41.34.75.75.75h10.5c.41 0 .75-.34.75-.75V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p id="download-feedback" class="download-feedback" role="status" aria-live="polite" hidden></p>
+            </div>
+          </section>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="footer"><span>Use responsibly. Respect creators’ rights.</span></footer>
+  </div>
+</body>
+</html>
